@@ -1,9 +1,42 @@
 body {
-  font-family: sans-serif;
+  background-color: #071c2a !important;
 }
 
+.heading {
+  font-family: caltonsFont;
+  font-size: 5em;
+  color:rgba(82, 148, 126, 0.504);
+  text-shadow: 0 1px 0 #CCCCCC, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
+}
+
+  .select-type {
+    font-family: bangelaFont;
+    font-size: 4em;
+    letter-spacing: .15em;
+    text-shadow: #e0e0e0 1px 1px 0;
+    color:rgba(82, 148, 126, 0.504);
+  }
+
+  .fate{
+    font-size: 4em;
+    letter-spacing: .15em;
+    text-shadow: #e0e0e0 1px 1px 0;
+    color:rgba(82, 148, 126, 0.504);
+    position: static;
+    right: -50em !important;  
+  }
+
+  .fate.winLose {
+    right: 11.5em !important;
+  }
+
+  .start {
+    position: sticky;
+    
+  }
+
 .popup {
-  background-color: rgb(243, 230, 230);
+  background-color: #0d2f45;
   width: 30em;
   height: 15em;
   position: relative;
@@ -15,12 +48,12 @@ body {
   border: 2px groove #071c2a;
   border-radius: 8px;
   position: sticky;
-  transform: translateX(100%);
+  transform: scale(0%);
   transition: transform ease-out 0.3s;
 }
 
 .popup.hidden {
-  transform: translateX(0);
+  transform: scale(100%);
 }
 
 .rock,
@@ -95,6 +128,22 @@ body {
 
 }
 
+.p-determine {
+  position: fixed;
+  bottom: 0;
+  left: 10em;
+  margin: auto;
+  padding: auto;
+}
+
+.ai-determine {
+  position: fixed;
+  margin: auto;
+  padding: auto;
+  right: 0;
+  bottom: 0;
+}
+ 
 .shake{
   animation: shake 0.5s;
   animation-iteration-count: infinite;
@@ -132,5 +181,27 @@ body {
   }
   100% {
     transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+@font-face {
+  font-family: 'caltonsFont';
+  src:
+      local('Caltons'), 
+      url('/fonts/Caltons.otf')
+      format('opentype')
+}
+
+@font-face {
+  font-family: 'bangelaFont';
+  src:
+      local('Bangela'), 
+      url('/fonts/Bangela.otf')
+      format('opentype')
+}
+
+@media screen and (min-width: 700px){
+  .fate h1 {
+    translate: scale(0.3) !important;  
   }
 }

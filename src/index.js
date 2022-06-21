@@ -57,6 +57,7 @@ start.addEventListener("click", () => {
   aiPaper.hidden = true;
   aiScissor.hidden = true;
   start.hidden = true;
+  winLose.classList.remove("winLose");
 });
 
 rockSelect.addEventListener("click", () => {
@@ -133,29 +134,35 @@ function endGame() {
         winLose.textContent = determine[0];
       } else if (ran === 2) {
         winLose.textContent = determine[2];
+        winLose.classList.add("winLose");
         aiScore++;
       } else {
         winLose.textContent = determine[1];
+        winLose.classList.add("winLose");
         pScore++;
       }
       break;
     case 2:
       if (ran === 1) {
         winLose.textContent = determine[1];
+        winLose.classList.add("winLose");
         pScore++;
       } else if (ran === 2) {
         winLose.textContent = determine[0];
       } else {
         winLose.textContent = determine[2];
+        winLose.classList.add("winLose");
         aiScore++;
       }
       break;
     case 3:
       if (ran === 1) {
         winLose.textContent = determine[2];
+        winLose.classList.add("winLose");
         aiScore++;
       } else if (ran === 2) {
         winLose.textContent = determine[1];
+        winLose.classList.add("winLose");
         pScore++;
       } else {
         winLose.textContent = determine[0];
