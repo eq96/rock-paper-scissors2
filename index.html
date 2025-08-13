@@ -1,77 +1,90 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Rock Paper Scissors - E. Quiroga</title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="./src/styles.css" />
-  </head>
-
-  <body>
-    <div class="container-fluid">
-      <h1 class="heading text-center m-5">Rock Paper Scissors</h1>
-      <div class="mx-auto" style="width: 200px;">
-        <button type="button" class="start btn btn-secondary p-2">
-          Restart Game
-        </button>
-      </div>
-      <div class="row p-5">
-        <div class="mx-auto col" style="background: #186c96; width: 300px;">
-          <h3
-            class="pScore text-center"
-            style="color: rgb(255, 254, 254); font-weight: 400;"
-          >
-            Player
-          </h3>
-        </div>
-        <div
-          class="mx-auto col"
-          style="background: rgb(218, 160, 160); width: 300px;"
-        >
-          <h3
-            class="aiScore text-center"
-            style="color: rgb(255, 254, 254); font-weight: 400;"
-          >
-            AI
-          </h3>
-        </div>
-        <div class="popup">
-          <div class="popup_row row justify-content-center">
-            <div class="p-determine col-3">
-              <img class="rock-determine" src="rockSvg.svg" alt="" />
-              <img class="paper-determine" src="paperSvg.svg" alt="" />
-              <img class="scissor-determine" src="scissorSvg.svg" alt="" />
-            </div>
-            <div class="col-3">
-              <h1 class="fate"></h1>
-            </div>
-            <div class="ai-determine col-3">
-              <img class="ai-rock-determine" src="rockSvg.svg" alt="" />
-              <img class="ai-paper-determine" src="paperSvg.svg" alt="" />
-              <img class="ai-scissor-determine" src="scissorSvg.svg" alt="" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="selHand row justify-content-center">
-        <h1 class="select-type text-center">Select a hand...</h1>
-        <img class="rock col-3" src="rockSvg.svg" alt="" />
-        <img class="paper col-3" src="paperSvg.svg" alt="" />
-        <img class="scissor col-3" src="scissorSvg.svg" alt="" />
-      </div>
-    </div>
-
-    <script src="src/index.js"></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/index.html b/index.html
+index e7a4d80de7239bfee83e326300ad3ad7a08ab927..ddbf6ca2442ed0acf9784b777fa83a127c574657 100644
+--- a/index.html
++++ b/index.html
+@@ -1,77 +1,64 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <title>Rock Paper Scissors - E. Quiroga</title>
+     <meta charset="UTF-8" />
+     <link rel="stylesheet" href="./src/styles.css" />
+   </head>
+ 
+   <body>
+     <div class="container-fluid">
+       <h1 class="heading text-center m-5">Rock Paper Scissors</h1>
+       <div class="mx-auto" style="width: 200px;">
+         <button type="button" class="start btn btn-secondary p-2">
+           Restart Game
+         </button>
+       </div>
+       <div class="row p-5">
+-        <div class="mx-auto col" style="background: #186c96; width: 300px;">
+-          <h3
+-            class="pScore text-center"
+-            style="color: rgb(255, 254, 254); font-weight: 400;"
+-          >
+-            Player
+-          </h3>
++        <div class="mx-auto col score-box player-score">
++          <h3 class="pScore text-center">Player</h3>
+         </div>
+-        <div
+-          class="mx-auto col"
+-          style="background: rgb(218, 160, 160); width: 300px;"
+-        >
+-          <h3
+-            class="aiScore text-center"
+-            style="color: rgb(255, 254, 254); font-weight: 400;"
+-          >
+-            AIa
+-          </h3>
++        <div class="mx-auto col score-box ai-score">
++          <h3 class="aiScore text-center">AI</h3>
+         </div>
+         <div class="popup">
+           <div class="popup_row row justify-content-center">
+             <div class="p-determine col-3">
+               <img class="rock-determine" src="rockSvg.svg" alt="" />
+               <img class="paper-determine" src="paperSvg.svg" alt="" />
+               <img class="scissor-determine" src="scissorSvg.svg" alt="" />
+             </div>
+             <div class="col-3">
+               <h1 class="fate"></h1>
+             </div>
+             <div class="ai-determine col-3">
+               <img class="ai-rock-determine" src="rockSvg.svg" alt="" />
+               <img class="ai-paper-determine" src="paperSvg.svg" alt="" />
+               <img class="ai-scissor-determine" src="scissorSvg.svg" alt="" />
+             </div>
+           </div>
+         </div>
+       </div>
+ 
+       <div class="selHand row justify-content-center">
+         <h1 class="select-type text-center">Select a hand...</h1>
++        <img class="rock hand col-3" src="rockSvg.svg" alt="" />
++        <img class="paper hand col-3" src="paperSvg.svg" alt="" />
++        <img class="scissor hand col-3" src="scissorSvg.svg" alt="" />
+       </div>
+     </div>
+ 
+     <script src="src/index.js"></script>
+     <link
+       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+       rel="stylesheet"
+       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+       crossorigin="anonymous"
+     />
+     <script
+       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+       crossorigin="anonymous"
+     ></script>
+   </body>
+ </html>
+ 
+EOF
+)
