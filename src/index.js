@@ -1,17 +1,4 @@
-const rockSelect = document.querySelector(".rock");
-const paperSelect = document.querySelector(".paper");
-const scissorSelect = document.querySelector(".scissor");
-const popup = document.querySelector(".popup");
-const selHand = document.querySelector(".selHand");
-
-//Player's rock-paper-scissor
-const pRock = document.querySelector(".rock-determine");
-const pPaper = document.querySelector(".paper-determine");
-const pScissor = document.querySelector(".scissor-determine");
-const pScoreEl = document.querySelector(".pScore");
-
-//AI's rock-paper-scissor
-const aiRock = document.querySelector(".ai-rock-determine");
+@@ -15,71 +15,86 @@ const aiRock = document.querySelector(".ai-rock-determine");
 const aiPaper = document.querySelector(".ai-paper-determine");
 const aiScissor = document.querySelector(".ai-scissor-determine");
 const aiScoreEl = document.querySelector(".aiScore");
@@ -37,6 +24,22 @@ let determine = ["Tie!", "You win!", "You lose!"];
 let pScore = 0;
 let aiScore = 0;
 
+function updateScoreBoard() {
+  pScoreEl.textContent = `Player: ${pScore}`;
+  aiScoreEl.textContent = `AI: ${aiScore}`;
+}
+
+function bumpScore(el) {
+  el.classList.add("score-update");
+  el.addEventListener(
+    "animationend",
+    () => el.classList.remove("score-update"),
+    { once: true }
+  );
+}
+
+updateScoreBoard();
+
 const listener = () => {
   popup.setAttribute("hidden", true);
 
@@ -49,6 +52,7 @@ start.addEventListener("click", () => {
   player = 0;
   pScoreEl.textContent = `Player: ${pScore}`;
   aiScoreEl.textContent = `Player: ${aiScore}`;
+  updateScoreBoard();
   winLose.textContent = "";
   pRock.hidden = true;
   pPaper.hidden = true;
@@ -58,6 +62,7 @@ start.addEventListener("click", () => {
   aiScissor.hidden = true;
   start.hidden = true;
   winLose.classList.remove("winLose");
+  winLose.classList.remove("winLose", "fade-in");
 });
 
 rockSelect.addEventListener("click", () => {
@@ -83,26 +88,7 @@ scissorSelect.addEventListener("click", () => {
   ran = ai[Math.floor(Math.random() * ai.length)];
   show();
   PlayHand();
-  aiPlayHand();
-});
-
-function hide() {
-  popup.addEventListener("transitionend", listener);
-
-  popup.classList.remove("hidden");
-
-  selHand.hidden = false;
-}
-
-function show() {
-  popup.removeAttribute("hidden");
-
-  const reflow = popup.offsetHeight;
-
-  // Trigger our CSS transition
-  popup.classList.add("hidden");
-}
-
+@@ -106,93 +121,108 @@ function show() {
 function playerSelect() {
   if (player === 1) {
     pRock.hidden = false;
@@ -128,6 +114,7 @@ function aiSelect() {
 }
 
 function endGame() {
+  let updated = null;
   switch (player) {
     case 1:
       if (ran === 1) {
@@ -136,10 +123,12 @@ function endGame() {
         winLose.textContent = determine[2];
         winLose.classList.add("winLose");
         aiScore++;
+        updated = aiScoreEl;
       } else {
         winLose.textContent = determine[1];
         winLose.classList.add("winLose");
         pScore++;
+        updated = pScoreEl;
       }
       break;
     case 2:
@@ -147,12 +136,14 @@ function endGame() {
         winLose.textContent = determine[1];
         winLose.classList.add("winLose");
         pScore++;
+        updated = pScoreEl;
       } else if (ran === 2) {
         winLose.textContent = determine[0];
       } else {
         winLose.textContent = determine[2];
         winLose.classList.add("winLose");
         aiScore++;
+        updated = aiScoreEl;
       }
       break;
     case 3:
@@ -160,10 +151,12 @@ function endGame() {
         winLose.textContent = determine[2];
         winLose.classList.add("winLose");
         aiScore++;
+        updated = aiScoreEl;
       } else if (ran === 2) {
         winLose.textContent = determine[1];
         winLose.classList.add("winLose");
         pScore++;
+        updated = pScoreEl;
       } else {
         winLose.textContent = determine[0];
       }
@@ -171,6 +164,14 @@ function endGame() {
     default:
       winLose.textContent = "ERROR";
   }
+  updateScoreBoard();
+  if (updated) bumpScore(updated);
+  winLose.classList.add("fade-in");
+  winLose.addEventListener(
+    "animationend",
+    () => winLose.classList.remove("fade-in"),
+    { once: true }
+  );
   start.hidden = false;
 }
 
@@ -196,37 +197,3 @@ function aiPlayHand() {
     aiScissor.classList.add("shake");
   }
   function aiSelected() {
-    aiScissor.hidden = true;
-    aiScissor.classList.remove("shake");
-    aiSelect();
-  }
-}
-
-function PlayHand() {
-  selHand.hidden = true;
-  setTimeout(showRock, 350);
-  function showRock() {
-    setTimeout(showPaper, 350);
-    pRock.hidden = false;
-    pRock.classList.add("shake");
-  }
-  function showPaper() {
-    setTimeout(showScissor, 350);
-    pRock.hidden = true;
-    pRock.classList.remove("shake");
-    pPaper.hidden = false;
-    pPaper.classList.add("shake");
-  }
-  function showScissor() {
-    setTimeout(pSelected, 350);
-    pPaper.hidden = true;
-    pPaper.classList.remove("shake");
-    pScissor.hidden = false;
-    pScissor.classList.add("shake");
-  }
-  function pSelected() {
-    pScissor.hidden = true;
-    pScissor.classList.remove("shake");
-    playerSelect();
-  }
-}
