@@ -1,5 +1,6 @@
 body {
-  background-color: #071c2a !important;
+  background: linear-gradient(135deg, #071c2a, #0d2f45) !important;
+  color: #fff;
 }
 
 .heading {
@@ -32,7 +33,15 @@ body {
 
   .start {
     position: sticky;
-    
+    background-color: #186c96;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  .start:hover {
+    background-color: #1f83b6;
+    transform: translateY(-2px);
   }
 
 .popup {
@@ -56,18 +65,15 @@ body {
   transform: scale(100%);
 }
 
-.rock,
-.paper,
-.scissor {
-  transition: all 0.2s ease-out;
+.hand {
+  transition: transform 0.2s ease-out, filter 0.2s ease-out;
   width: 150px;
   height: 150px;
 }
 
-.rock:hover,
-.paper:hover,
-.scissor:hover {
-  transform: scale(0.9);
+.hand:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
   cursor: pointer;
 }
 
@@ -143,7 +149,7 @@ body {
   right: 0;
   bottom: 0;
 }
- 
+
 .shake{
   animation: shake 0.5s;
   animation-iteration-count: infinite;
@@ -184,6 +190,59 @@ body {
   }
 }
 
+.score-box {
+  background: rgba(255, 255, 255, 0.1);
+  width: 300px;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.player-score {
+  background: linear-gradient(135deg, #186c96, #0d3b5a);
+}
+
+.ai-score {
+  background: linear-gradient(135deg, #da6a6a, #7e2a2a);
+}
+
+.score-box h3 {
+  color: #fff;
+  font-weight: 600;
+  margin: 0;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.score-update {
+  animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 @font-face {
   font-family: 'caltonsFont';
   src:
@@ -202,6 +261,6 @@ body {
 
 @media screen and (min-width: 700px){
   .fate h1 {
-    translate: scale(0.3) !important;  
+    transform: scale(0.3) !important;
   }
 }

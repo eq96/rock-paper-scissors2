@@ -37,6 +37,22 @@ let determine = ["Tie!", "You win!", "You lose!"];
 let pScore = 0;
 let aiScore = 0;
 
+function updateScoreBoard() {
+  pScoreEl.textContent = `Player: ${pScore}`;
+  aiScoreEl.textContent = `AI: ${aiScore}`;
+}
+
+function bumpScore(el) {
+  el.classList.add("score-update");
+  el.addEventListener(
+    "animationend",
+    () => el.classList.remove("score-update"),
+    { once: true }
+  );
+}
+
+updateScoreBoard();
+
 const listener = () => {
   popup.setAttribute("hidden", true);
 
@@ -47,8 +63,7 @@ start.addEventListener("click", () => {
   //   popup.hidden = true;
   hide();
   player = 0;
-  pScoreEl.textContent = `Player: ${pScore}`;
-  aiScoreEl.textContent = `Player: ${aiScore}`;
+  updateScoreBoard();
   winLose.textContent = "";
   pRock.hidden = true;
   pPaper.hidden = true;
@@ -57,7 +72,7 @@ start.addEventListener("click", () => {
   aiPaper.hidden = true;
   aiScissor.hidden = true;
   start.hidden = true;
-  winLose.classList.remove("winLose");
+  winLose.classList.remove("winLose", "fade-in");
 });
 
 rockSelect.addEventListener("click", () => {
@@ -128,6 +143,7 @@ function aiSelect() {
 }
 
 function endGame() {
+  let updated = null;
   switch (player) {
     case 1:
       if (ran === 1) {
@@ -136,10 +152,12 @@ function endGame() {
         winLose.textContent = determine[2];
         winLose.classList.add("winLose");
         aiScore++;
+        updated = aiScoreEl;
       } else {
         winLose.textContent = determine[1];
         winLose.classList.add("winLose");
         pScore++;
+        updated = pScoreEl;
       }
       break;
     case 2:
@@ -147,12 +165,14 @@ function endGame() {
         winLose.textContent = determine[1];
         winLose.classList.add("winLose");
         pScore++;
+        updated = pScoreEl;
       } else if (ran === 2) {
         winLose.textContent = determine[0];
       } else {
         winLose.textContent = determine[2];
         winLose.classList.add("winLose");
         aiScore++;
+        updated = aiScoreEl;
       }
       break;
     case 3:
@@ -160,10 +180,12 @@ function endGame() {
         winLose.textContent = determine[2];
         winLose.classList.add("winLose");
         aiScore++;
+        updated = aiScoreEl;
       } else if (ran === 2) {
         winLose.textContent = determine[1];
         winLose.classList.add("winLose");
         pScore++;
+        updated = pScoreEl;
       } else {
         winLose.textContent = determine[0];
       }
@@ -171,6 +193,14 @@ function endGame() {
     default:
       winLose.textContent = "ERROR";
   }
+  updateScoreBoard();
+  if (updated) bumpScore(updated);
+  winLose.classList.add("fade-in");
+  winLose.addEventListener(
+    "animationend",
+    () => winLose.classList.remove("fade-in"),
+    { once: true }
+  );
   start.hidden = false;
 }
 
